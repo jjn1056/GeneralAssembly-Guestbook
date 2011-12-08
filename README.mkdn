@@ -1,0 +1,26 @@
+# NAME
+
+GeneralAssembly::Guestbook - My Brand New Module
+
+# SYNOPSIS
+
+    use GeneralAssembly::Guestbook;
+
+# DESCRIPTION
+
+GeneralAssembly::Guestbook is ...
+
+# AUTHOR
+
+John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
+
+# SEE ALSO
+
+    TBD
+
+# COPYRIGHT & LICENSE
+
+Copyright 2011, John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
