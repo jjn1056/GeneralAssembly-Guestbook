@@ -33,7 +33,6 @@ sub map_entries {
   $self->_map_entries(sub {
     $code->($_->as_entry_hash);
   });
-
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -48,11 +48,11 @@ GeneralAssembly::Guestbook - Example of a Guestbook application
 
 =head1 SYNOPSIS
 
-    plackup -Ilib lib/GeneralAssembly/Guestbook.pm
+    plackup -Ilib script/guestbook.psgi
 
 =head1 DESCRIPTION
 
-This is an example web application using L<Web::Simple>, L<Moo> and L<HTML::Zoom>.
+This is an example web application using L<Web::Simple>, L<Moose> and L<HTML::Zoom>.
 
 Written in support of tech talk.  The goal here is to explain a thinking process
 used to model systems, or how I would solve my own interview question.
@@ -65,7 +65,7 @@ The following is an overview of how to install and run this application.
 
 =item Fork and Clone Repository
 
-Fork on github L<https://github.com/jjn1056/GeneralAssembly-Guestbook-Web>, then
+Fork on github L<https://github.com/jjn1056/GeneralAssembly-Guestbook>, then
 clone your fork down to your local system.
 
 =item Install Depdendencies
@@ -74,13 +74,13 @@ From the root of your clone type:
 
     cpanm --installdeps .
 
-You may use to setup a L<local::lib> first.  
+You may use to setup a L<local::lib> first.
 
 =item Run the server
 
 From the commandline and root of your local clone.
 
-    plackup lib/GeneralAssembly/Guestbook/Web.pm
+    plackup -Ilib script/guestbook.psgi
 
 Then point your browser to http://localhost:5000
 

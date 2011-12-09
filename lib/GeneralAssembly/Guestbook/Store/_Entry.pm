@@ -2,12 +2,7 @@ package GeneralAssembly::Guestbook::Store::_Entry;
 
 use Moose;
 
-has name => (
-  is => 'ro',
-  required => 1,
-);
-
-has comment => (
+has ['name', 'comment'] => (
   is => 'ro',
   required => 1,
 );
