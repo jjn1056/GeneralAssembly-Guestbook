@@ -40,7 +40,7 @@ sub web {
   );
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 
 =head1 NAME
 

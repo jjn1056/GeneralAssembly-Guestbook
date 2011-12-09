@@ -6,8 +6,9 @@ use Text::Markdown 'markdown';
 use IO::All;
 
 has message_log => (
-  is => 'ro',
+  is => 'bare',
   required => 1,
+  handles => ['map_entries'],
 );
 
 has template => (
@@ -23,32 +24,33 @@ has content_file => (
 has zoom => (
   is => 'ro',
   lazy_build => 1,
+  handles => {
+    fill_comments => [ repeat_content => '#comments'],
+  },
 );
 
 sub _build_zoom {
-  my $content = markdown io((my $self = shift)->content_file)->all;
-  HTML::Zoom
+  my $content_html = (my $self = shift)->_content_html;
+  return HTML::Zoom
     ->from_file($self->template)
-    ->replace_content('#main-content' => \$content)
+    ->replace_content('#main-content' => \$content_html);
+}
+
+sub _content_html { markdown io(shift->content_file)->all }
+
+sub _transform_on_entry {
+  my %entry = @_;
+  return sub {
+    $_->replace_content('.name' => $entry{name})
+      ->replace_content('.comment' => $entry{comment})
+      ->replace_content('.time' => $entry{time});
+  };
 }
 
 sub render_to_fh {
-  my @transforms = (my $self = shift)->message_log->map_entries
-  (
-    sub {
-      my %entry = @_;
-      sub {
-        $_->replace_content('.name' => $entry{name})
-          ->replace_content('.comment' => $entry{comment})
-          ->replace_content('.time' => $entry{time});
-      }
-    }
-  );
-
-  $self
-    ->zoom
-    ->repeat_content('#comments' => \@transforms)
-    ->to_fh;
+  my @transforms = (my $self = shift)
+    ->map_entries(\&_transform_on_entry);
+  $self->fill_comments(\@transforms)->to_fh;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

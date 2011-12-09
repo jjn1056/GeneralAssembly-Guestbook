@@ -7,5 +7,5 @@ has store => (
   handles => [ qw(create_and_add_entry map_entries) ],
 );
 
-1;
+__PACKAGE__->meta->make_immutable;;
 

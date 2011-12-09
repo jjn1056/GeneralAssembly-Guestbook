@@ -23,4 +23,4 @@ sub as_entry_hash {
   'time' => $_[0]->time,
 }
 
-1;
+__PACKAGE__->meta->make_immutable;

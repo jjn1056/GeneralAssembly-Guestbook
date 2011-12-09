@@ -7,7 +7,13 @@ with 'GeneralAssembly::Guestbook::Store';
 
 has _entries => (
   is => 'rw',
+  traits => ['Array'],
   default => sub { +[] },
+  handles => {
+    entry_list => 'elements',
+    add_entry => 'push',
+    '_map_entries' => 'map',
+  },
 );
 
 sub create_entry {
@@ -16,26 +22,18 @@ sub create_entry {
     ->new(name => $name, comment => $comment);
 }
 
-sub add_entry {
-  my @comments = ((my $self = shift)
-    ->entry_list, @_);
-  $self->_entries(\@comments);
-}
-
 sub create_and_add_entry {
   my $comment = (my $self = shift)
     ->create_entry(@_);
   $self->add_entry($comment);
 }
 
-sub entry_list { @{shift->_entries} }
-
 sub map_entries {
   my ($self, $code) = @_;
-  map {
+  $self->_map_entries(sub {
     $code->($_->as_entry_hash);
-  } $self->entry_list;
+  });
+
 }
 
-
-1;
+__PACKAGE__->meta->make_immutable;
