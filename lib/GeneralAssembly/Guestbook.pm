@@ -32,8 +32,8 @@ sub _build_page {
 }
 
 sub web {
-  my ($class, @options) = @_;
-  my $app = $class->new(@options);
+  my ($class, %options) = @_;
+  my $app = $class->new(%options);
   GeneralAssembly::Guestbook::Web->new(
     page => $app->page,
     message_log => $app->message_log,

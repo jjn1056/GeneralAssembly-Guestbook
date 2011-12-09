@@ -1,26 +1,50 @@
 # NAME
 
-GeneralAssembly::Guestbook - My Brand New Module
+GeneralAssembly::Guestbook - Example of a Guestbook application
 
 # SYNOPSIS
 
-    use GeneralAssembly::Guestbook;
+    plackup -Ilib lib/GeneralAssembly/Guestbook.pm
 
 # DESCRIPTION
 
-GeneralAssembly::Guestbook is ...
+This is an example web application using [Web::Simple](http://search.cpan.org/perldoc?Web::Simple), [Moo](http://search.cpan.org/perldoc?Moo) and [HTML::Zoom](http://search.cpan.org/perldoc?HTML::Zoom).
+
+Written in support of tech talk.  The goal here is to explain a thinking process
+used to model systems, or how I would solve my own interview question.
+
+## Install and Run
+
+The following is an overview of how to install and run this application.
+
+- Fork and Clone Repository
+
+Fork on github [https://github.com/jjn1056/GeneralAssembly-Guestbook-Web](https://github.com/jjn1056/GeneralAssembly-Guestbook-Web), then
+clone your fork down to your local system.
+
+- Install Depdendencies
+
+From the root of your clone type:
+
+    cpanm --installdeps .
+
+You may use to setup a [local::lib](http://search.cpan.org/perldoc?local::lib) first.  
+
+- Run the server
+
+From the commandline and root of your local clone.
+
+    plackup lib/GeneralAssembly/Guestbook/Web.pm
+
+Then point your browser to http://localhost:5000
 
 # AUTHOR
 
-John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
-
-# SEE ALSO
-
-    TBD
+John Napiorkowski ` <<jjnapiork@cpan.org`> >
 
 # COPYRIGHT & LICENSE
 
-Copyright 2011, John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
+Copyright 2011, John Napiorkowski
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
