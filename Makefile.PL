@@ -12,6 +12,11 @@ requires 'HTTP::Throwable';
 requires 'Text::Markdown';
 requires 'IO::All';
 requires 'Class::Load';
+requires 'DBIx::Class';
+requires 'DBIx::Class::Candy';
+requires 'DBIx::Class::Helpers';
+requires 'Data::UUID::Base64URLSafe';
+requires 'Test::DBIx::Class';
 
 test_requires 'Test::Most';
 tests_recursive;

@@ -4,11 +4,11 @@ GeneralAssembly::Guestbook - Example of a Guestbook application
 
 # SYNOPSIS
 
-    plackup -Ilib lib/GeneralAssembly/Guestbook.pm
+    plackup -Ilib script/guestbook.psgi
 
 # DESCRIPTION
 
-This is an example web application using [Web::Simple](http://search.cpan.org/perldoc?Web::Simple), [Moo](http://search.cpan.org/perldoc?Moo) and [HTML::Zoom](http://search.cpan.org/perldoc?HTML::Zoom).
+This is an example web application using [Web::Simple](http://search.cpan.org/perldoc?Web::Simple), [Moose](http://search.cpan.org/perldoc?Moose) and [HTML::Zoom](http://search.cpan.org/perldoc?HTML::Zoom).
 
 Written in support of tech talk.  The goal here is to explain a thinking process
 used to model systems, or how I would solve my own interview question.
@@ -19,7 +19,7 @@ The following is an overview of how to install and run this application.
 
 - Fork and Clone Repository
 
-Fork on github [https://github.com/jjn1056/GeneralAssembly-Guestbook-Web](https://github.com/jjn1056/GeneralAssembly-Guestbook-Web), then
+Fork on github [https://github.com/jjn1056/GeneralAssembly-Guestbook](https://github.com/jjn1056/GeneralAssembly-Guestbook), then
 clone your fork down to your local system.
 
 - Install Depdendencies
@@ -28,13 +28,13 @@ From the root of your clone type:
 
     cpanm --installdeps .
 
-You may use to setup a [local::lib](http://search.cpan.org/perldoc?local::lib) first.  
+You may use to setup a [local::lib](http://search.cpan.org/perldoc?local::lib) first.
 
 - Run the server
 
 From the commandline and root of your local clone.
 
-    plackup lib/GeneralAssembly/Guestbook/Web.pm
+    plackup -Ilib script/guestbook.psgi
 
 Then point your browser to http://localhost:5000
 
