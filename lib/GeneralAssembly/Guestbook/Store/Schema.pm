@@ -7,23 +7,22 @@ use Test::DBIx::Class
 
 with 'GeneralAssembly::Guestbook::Store';
 
+has 'schema' => (is=>'ro', required=>1, default=> sub { Schema });
+
 sub create_and_add_entry {
-  my ($self_or_class, $name, $comment) = @_;
-  User->
+  my ($self, $name, $comment) = @_;
+  $self->schema->resultset('User')->
    create({name=>$name})->
     create_related('comment_rs', {text=>$comment});
 }
 
-sub map_entries {
-  my ($self, $code) = @_;
-  my @return;
-  while(my $comment = Comment->next) {
-    my %entry_hash = $comment->as_entry_hash;
-    push @return, $code->(%entry_hash);
-  }
-  Comment->reset;
-  return @return;
+sub entry_list {
+  shift->schema->resultset('Comment')->
+    search({},{
+      join=>'user',
+      select=>['text','user.name','created'],
+      as=>['comment','name','time'],
+    })->as_arrayref;
 }
 
-__PACKAGE__->create_and_add_entry('John', 'Great Site');
 __PACKAGE__->meta->make_immutable;

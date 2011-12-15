@@ -3,8 +3,6 @@ package GeneralAssembly::Guestbook::Store::Memory;
 use Moose;
 use GeneralAssembly::Guestbook::Store::_Entry;
 
-with 'GeneralAssembly::Guestbook::Store';
-
 has _entries => (
   is => 'rw',
   traits => ['Array'],
@@ -12,9 +10,10 @@ has _entries => (
   handles => {
     entry_list => 'elements',
     add_entry => 'push',
-    '_map_entries' => 'map',
   },
 );
+
+with 'GeneralAssembly::Guestbook::Store';
 
 sub create_entry {
   my ($self, $name, $comment) = @_;
@@ -26,13 +25,6 @@ sub create_and_add_entry {
   my $comment = (my $self = shift)
     ->create_entry(@_);
   $self->add_entry($comment);
-}
-
-sub map_entries {
-  my ($self, $code) = @_;
-  $self->_map_entries(sub {
-    $code->($_->as_entry_hash);
-  });
 }
 
 __PACKAGE__->meta->make_immutable;

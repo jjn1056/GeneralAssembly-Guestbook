@@ -1,9 +1,16 @@
 #!/usr/bin/env plackup
 
+use Plack::Builder;
 use GeneralAssembly::Guestbook;
-GeneralAssembly::Guestbook->web(
-  template => 'share/page.html',
+
+my $app = GeneralAssembly::Guestbook->web(
+  template => 'page.mt',
   content_file => 'README.mkdn',
   store_class => 'GeneralAssembly::Guestbook::Store::Schema',
-)->to_psgi_app;
+);
+
+builder {
+  enable 'Debug';
+  $app->to_psgi_app;
+};
 

@@ -1,20 +1,22 @@
+? my ($content, @comments) = @_;
 <html>
   <head>
       <title>General Assembly Guestbook Application</title>
-      <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"
+      <link rel="stylesheet"
+        href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"
         type="text/css" rel="Stylesheet">
   </head>
   <body class="container">
-    <div id="main-content">Here's is the great content...</div>
+    <div id="main-content"><?= $content ?></div>
     <h1>COMMENTS</h1>
-    <dl id="comments">
+    <dl id="comments"><? for my $comment (@comments) { ?>
       <dt>Name</dt>
-      <dd class="name">Joe Doe</dd>
+      <dd class="name"><?= $comment->{name} ?></dd>
       <dt>Time</dt>
-      <dd class="time">January 1, 2000</dd>
+      <dd class="time"><?= $comment->{time} ?></dd>
       <dt>Comment</dt>
-      <dd class="comment">Here is a sample Comment</dd>
-    </dl>
+      <dd class="comment"><?= $comment->{comment} ?></dd>
+    <? } ?></dl>
     <form class="form-stacked" method="post">
       <fieldset>
         <legend>New Comment</legend>

@@ -1,15 +1,18 @@
 package GeneralAssembly::Guestbook::Page;
 
 use Moose;
-use HTML::Zoom;
+use Text::MicroTemplate 'encoded_string';
+use Text::MicroTemplate::File;
 use Text::Markdown 'markdown';
 use IO::All;
 
 has message_log => (
   is => 'bare',
   required => 1,
-  handles => ['map_entries'],
+  handles => ['entry_list'],
 );
+
+has include_path => (is=>'ro', required=>1);
 
 has template => (
   is => 'ro',
@@ -21,36 +24,31 @@ has content_file => (
   required => 1,
 );
 
-has zoom => (
+has template_processor => (
   is => 'ro',
   lazy_build => 1,
-  handles => {
-    fill_comments => [ repeat_content => '#comments'],
-  },
+  handles => ['render_file'],
 );
 
-sub _build_zoom {
-  my $content_html = (my $self = shift)->_content_html;
-  return HTML::Zoom
-    ->from_file($self->template)
-    ->replace_content('#main-content' => \$content_html);
+sub _build_template_processor {
+  return Text::MicroTemplate::File->new(
+    include_path => [ $_[0]->include_path ],
+    use_cache => 1,
+  );
 }
 
-sub _content_html { markdown io(shift->content_file)->all }
+sub content_html { encoded_string markdown io(shift->content_file)->all }
 
-sub _transform_on_entry {
-  my %entry = @_;
-  return sub {
-    $_->replace_content('.name' => $entry{name})
-      ->replace_content('.comment' => $entry{comment})
-      ->replace_content('.time' => $entry{time});
-  };
-}
+sub render {
 
-sub render_to_fh {
-  my @transforms = (my $self = shift)
-    ->map_entries(\&_transform_on_entry);
-  $self->fill_comments(\@transforms)->to_fh;
+    use Devel::Dwarn;
+    Dwarn $_[0]->entry_list;
+
+  $_[0]->render_file(
+    $_[0]->template,
+    $_[0]->content_html,
+    $_[0]->entry_list,
+  );
 }
 
 __PACKAGE__->meta->make_immutable;
