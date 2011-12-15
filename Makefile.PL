@@ -17,6 +17,8 @@ requires 'DBIx::Class::Candy';
 requires 'DBIx::Class::Helpers';
 requires 'Data::UUID::Base64URLSafe';
 requires 'Test::DBIx::Class';
+requires 'Config::ZOMG';
+requires 'File::Share';
 
 test_requires 'Test::Most';
 tests_recursive;

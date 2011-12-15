@@ -5,6 +5,8 @@ our $VERSION = '0.01';
 
 use Moose;
 use Class::Load 'load_class';
+use Config::ZOMG;
+use File::Share 'dist_dir';
 use GeneralAssembly::Guestbook::Web;
 use GeneralAssembly::Guestbook::Page;
 use GeneralAssembly::Guestbook::MessageLog;
@@ -15,6 +17,7 @@ has store_class => (is => 'ro', required => 1);
 
 has message_log => (is => 'ro', init_arg => undef, lazy_build => 1);
 has page => (is => 'ro', init_arg => undef, lazy_build => 1);
+has sharedir => (is => 'ro', lazy_build => 1);
 
 sub _build_message_log {
   load_class $_[0]->store_class;
@@ -31,12 +34,14 @@ sub _build_page {
   );
 }
 
+sub _build_sharedir { dist_dir 'GeneralAssembly-Guestbook' }
+
 sub web {
   my ($class, %options) = @_;
-  my $app = $class->new(%options);
+  my $self = $class->new(%options);
   GeneralAssembly::Guestbook::Web->new(
-    page => $app->page,
-    message_log => $app->message_log,
+    page => $self->page,
+    message_log => $self->message_log,
   );
 }
 

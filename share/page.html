@@ -1,12 +1,12 @@
 <html>
   <head>
-    <title>My Awesome Page</title>
-    <link href="http://cachedcommons.org/cache/blueprint/0.9.1/stylesheets/screen-min.css"
-        type="text/css" rel="Stylesheet" />
+      <title>General Assembly Guestbook Application</title>
+      <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css"
+        type="text/css" rel="Stylesheet">
   </head>
   <body class="container">
     <div id="main-content">Here's is the great content...</div>
-    <h1>Comments</h1>
+    <h1>COMMENTS</h1>
     <dl id="comments">
       <dt>Name</dt>
       <dd class="name">Joe Doe</dd>
@@ -15,18 +15,26 @@
       <dt>Comment</dt>
       <dd class="comment">Here is a sample Comment</dd>
     </dl>
-    <form method="post">
+    <form class="form-stacked" method="post">
       <fieldset>
         <legend>New Comment</legend>
-        <p>
-          <label for="name">Name</label><br/>
-          <input type="text" name="name"/>
-        </p>
-        <p>
-        <label for="comment">Comment</label><br/>
-        <textarea name="comment"></textarea>
-        </p>
-        <input type="submit" />
+        <div class="clearfix">
+          <label for="name">Name</label>
+          <div class="input">
+            <input class="xlarge" type="text" name="name"/>
+          </div>
+        </div>
+        <div class="clearfix">
+          <label for="comment">Comment</label>
+          <div class="input">
+            <textarea class="xlarge" name="comment"></textarea>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="input">
+            <input type="submit" />
+          </div>
+        </div>
       </fieldset>
     </form>
   </body>

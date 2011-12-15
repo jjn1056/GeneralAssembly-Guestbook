@@ -50,11 +50,6 @@ sub _transform_on_entry {
 sub render_to_fh {
   my @transforms = (my $self = shift)
     ->map_entries(\&_transform_on_entry);
-
-use Devel::Dwarn;
-Dwarn \@transforms;
-
-
   $self->fill_comments(\@transforms)->to_fh;
 }
 
