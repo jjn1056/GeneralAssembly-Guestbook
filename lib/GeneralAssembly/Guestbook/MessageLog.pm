@@ -4,7 +4,7 @@ use Moose;
 
 has store => (
   is => 'ro',
-  handles => [ qw(create_and_add_entry entry_list) ],
+  handles => 'GeneralAssembly::Guestbook::Store',
 );
 
 __PACKAGE__->meta->make_immutable;;

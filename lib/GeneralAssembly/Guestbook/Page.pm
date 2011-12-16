@@ -40,10 +40,6 @@ sub _build_template_processor {
 sub content_html { encoded_string markdown io(shift->content_file)->all }
 
 sub render {
-
-    use Devel::Dwarn;
-    Dwarn $_[0]->entry_list;
-
   $_[0]->render_file(
     $_[0]->template,
     $_[0]->content_html,

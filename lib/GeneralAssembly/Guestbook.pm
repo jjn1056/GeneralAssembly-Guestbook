@@ -4,7 +4,6 @@ use 5.008008;
 our $VERSION = '0.01';
 
 use Moose;
-use Config::ZOMG;
 use File::Spec;
 use Class::Load 'load_class';
 use File::ShareDir::ProjectDistDir 'dist_dir';
