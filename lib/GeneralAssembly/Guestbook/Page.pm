@@ -9,7 +9,10 @@ use IO::All;
 has message_log => (
   is => 'bare',
   required => 1,
-  handles => ['entry_list'],
+  handles => {
+    'entry_list' => 'entry_list',
+    'render_form' => 'render',
+  },
 );
 
 has include_path => (is=>'ro', required=>1);
@@ -37,12 +40,13 @@ sub _build_template_processor {
   );
 }
 
-sub content_html { encoded_string markdown io(shift->content_file)->all }
+sub content_html { markdown io(shift->content_file)->all }
 
 sub render {
   $_[0]->render_file(
     $_[0]->template,
-    $_[0]->content_html,
+    encoded_string($_[0]->content_html),
+    encoded_string($_[0]->render_form),
     $_[0]->entry_list,
   );
 }

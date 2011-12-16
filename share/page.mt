@@ -1,4 +1,4 @@
-? my ($content, @comments) = @_;
+? my ($content, $form, @comments) = @_;
 <html>
   <head>
       <title>General Assembly Guestbook Application</title>
@@ -17,27 +17,6 @@
       <dt>Comment</dt>
       <dd class="comment"><?= $comment->{comment} ?></dd>
     <? } ?></dl>
-    <form class="form-stacked" method="post">
-      <fieldset>
-        <legend>New Comment</legend>
-        <div class="clearfix">
-          <label for="name">Name</label>
-          <div class="input">
-            <input class="xlarge" type="text" name="name"/>
-          </div>
-        </div>
-        <div class="clearfix">
-          <label for="comment">Comment</label>
-          <div class="input">
-            <textarea class="xlarge" name="comment"></textarea>
-          </div>
-        </div>
-        <div class="clearfix">
-          <div class="input">
-            <input type="submit" />
-          </div>
-        </div>
-      </fieldset>
-    </form>
-  </body>
+    <?= $form ?>
+   </body>
 </html>
