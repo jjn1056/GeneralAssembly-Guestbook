@@ -17,8 +17,8 @@ sub post_and_show_page {
 }
 
 sub dispatch_request {
-  sub(/) {
-    sub(GET) { shift->show_page },
+  sub (/) {
+    sub (GET) { shift->show_page },
     sub (POST + %*) {
       my ($self, $params) = @_;
       $self->post_and_show_page($params);
