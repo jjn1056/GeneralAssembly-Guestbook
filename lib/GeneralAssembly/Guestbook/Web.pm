@@ -20,7 +20,8 @@ sub dispatch_request {
   sub(/) {
     sub(GET) { shift->show_page },
     sub (POST + %*) {
-      shift->post_and_show_page(@_);
+      my ($self, $params) = @_;
+      $self->post_and_show_page($params);
     }
   }
 }

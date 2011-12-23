@@ -14,6 +14,7 @@ use GeneralAssembly::Guestbook::MessageLog;
 has template => (is => 'ro', required => 1);
 has content_file => (is => 'ro', required => 1);
 has store_class => (is => 'ro', required => 1);
+has store_args => (is => 'ro', isa=>'ArrayRef', default => sub {+[]});
 
 has message_log => (is => 'ro', init_arg => undef, lazy_build => 1);
 has page => (is => 'ro', init_arg => undef, lazy_build => 1);
@@ -22,7 +23,7 @@ has sharedir => (is => 'ro', lazy_build=>1);
 sub _build_message_log {
   load_class $_[0]->store_class;
   GeneralAssembly::Guestbook::MessageLog->new(
-    store => $_[0]->store_class->new,
+    store => $_[0]->store_class->new(@{$_[0]->store_args}),
   );
 }
 

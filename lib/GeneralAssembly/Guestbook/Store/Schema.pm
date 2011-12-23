@@ -1,20 +1,26 @@
 package GeneralAssembly::Guestbook::Store::Schema;
 
 use Moose;
-use Test::DBIx::Class
-  -schema_class=>'GeneralAssembly::Guestbook::Schema',
-  qw(User Comment);
 
 with 'GeneralAssembly::Guestbook::Store';
 
+has schema => (
+  is=>'ro',
+  required=>1,
+  handles=> {
+    user_rs => [resultset => 'User'],
+    comment_rs => [resultset => 'Comment'],
+  },
+);
+
 sub create_and_add_entry {
   my ($self, $name, $comment) = @_;
-  User->create({name=>$name})->
+  $self->user_rs->create({name=>$name})->
     create_related('comment_rs', {text=>$comment});
 }
 
 sub entry_list {
-  Comment->search({},{
+  shift->comment_rs->search({},{
     join=>'user',
     select=>['text','user.name','created'],
     as=>['comment','name','time'],

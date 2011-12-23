@@ -15,7 +15,8 @@ has_field 'comment' => ( type => 'TextArea', required=>1 );
 has_field 'submit' => ( type => 'Submit', required=>1 );
 
 sub create_and_add_entry_if_valid {
-  if((my $self = shift)->process(params=>(my $params = shift))) {
+  my ($self, $params) = @_;
+  if($self->process(params=>$params)) {
     $self->create_and_add_entry(@$params{qw/name comment/});
     $self->clear;
     $self->setup_form;
