@@ -10,7 +10,7 @@ sub create_and_add_entry {
 sub entry_list {
   $_[0]->search({},{
     join=>'user',
-    select=>['text','user.name','created'],
+    select=>["${\$_[0]->me}text",'user.name',"${\$_[0]->me}created"],
     as=>['comment','name','time'],
     order_by => { -desc => "${\$_[0]->me}created" },
   });
