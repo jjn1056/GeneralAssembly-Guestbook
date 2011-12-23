@@ -1,8 +1,6 @@
 package GeneralAssembly::Guestbook::MessageLog;
 
 use Moose;
-use HTML::FormHandler::Moose;
-extends 'HTML::FormHandler';
 
 has store => (
   is => 'ro',
@@ -10,9 +8,12 @@ has store => (
   handles => 'GeneralAssembly::Guestbook::Store',
 );
 
-has_field 'name' => ( type => 'Text', required=>1 );
-has_field 'comment' => ( type => 'TextArea', required=>1 );
-has_field 'submit' => ( type => 'Submit', required=>1 );
+has _validator => (
+  is=>'bare',
+  init_arg => undef,
+  default => sub { GeneralAssembly::Guestbook::MessageLog::_Form->new },
+  handles => [qw/process clear setup_form render/],
+);
 
 sub create_and_add_entry_if_valid {
   my ($self, $params) = @_;
@@ -23,5 +24,15 @@ sub create_and_add_entry_if_valid {
   }
 }
 
-__PACKAGE__->meta->make_immutable;
+package GeneralAssembly::Guestbook::MessageLog::_Form;
 
+use Moose;
+use HTML::FormHandler::Moose;
+
+extends 'HTML::FormHandler';
+
+has_field 'name' => ( type => 'Text', required=>1 );
+has_field 'comment' => ( type => 'TextArea', required=>1 );
+has_field 'submit' => ( type => 'Submit', required=>1 );
+
+__PACKAGE__->meta->make_immutable;

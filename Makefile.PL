@@ -18,7 +18,6 @@ requires 'Data::UUID::Base64URLSafe';
 requires 'Test::DBIx::Class';
 requires 'File::Spec';
 requires 'File::ShareDir::ProjectDistDir';
-requires 'Plack::Middleware::Debug';
 requires 'Text::MicroTemplate::File';
 requires 'HTML::FormHandler';
 
