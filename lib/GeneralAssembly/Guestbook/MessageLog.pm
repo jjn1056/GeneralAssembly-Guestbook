@@ -12,7 +12,7 @@ has _validator => (
   is=>'bare',
   init_arg => undef,
   default => sub { GeneralAssembly::Guestbook::MessageLog::_Form->new },
-  handles => [qw/process clear setup_form render/],
+  handles => [qw/process clear setup_form fif error_fields/],
 );
 
 sub create_and_add_entry_if_valid {
@@ -22,6 +22,10 @@ sub create_and_add_entry_if_valid {
     $self->clear;
     $self->setup_form;
   }
+}
+
+sub errors {
+  +{ map { $_->name => $_->errors} shift->error_fields };
 }
 
 package GeneralAssembly::Guestbook::MessageLog::_Form;

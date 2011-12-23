@@ -1,4 +1,4 @@
-? my ($content, $form, @comments) = @_;
+? my ($content, $fif, $errors, @comments) = @_;
 <html>
   <head>
       <title>General Assembly Guestbook Application</title>
@@ -17,6 +17,25 @@
       <dt>Comment</dt>
       <dd class="comment"><?= $comment->{comment} ?></dd>
     <? } ?></dl>
-    <?= $form ?>
+    <form class="form-stacked" method="post" action="/">
+      <fieldset>
+        <legend>Create a New Comment</legend>
+        <div class="clearfix">
+          <label>Name</label>
+            <div class="input">
+              <input  class="xlarge" type="text" name="name" value="<?= $fif->{name} ?>" />
+              <span class="help-inline"><?= join ',', @{$errors->{name} ||[]} ?></span>
+           </div>
+        </div>
+        <div class="clearfix">
+          <label>Message</label>
+            <div class="input">
+              <textarea class="xlarge" name="comment"><?= $fif->{comment} ?></textarea>
+              <span class="help-inline"><?= join ',', @{$errors->{comment} ||[]} ?></span>
+            </div>
+        </div>
+        <button class="btn primary">Submit Comment</button>
+      </fieldset>
+    </form>
    </body>
 </html>
