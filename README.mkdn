@@ -40,7 +40,7 @@ Then point your browser to http://localhost:5000
 
 # AUTHOR
 
-John Napiorkowski ` <<jjnapiork@cpan.org`> >
+John Napiorkowski ` <<jjnapiork@cpan.org`\> >
 
 # COPYRIGHT & LICENSE
 

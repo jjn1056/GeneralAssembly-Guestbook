@@ -1,6 +1,5 @@
 #!/usr/bin/env plackup
 
-use Plack::Builder;
 use GeneralAssembly::Guestbook;
 use Test::DBIx::Class
   -schema_class=>'GeneralAssembly::Guestbook::Schema';

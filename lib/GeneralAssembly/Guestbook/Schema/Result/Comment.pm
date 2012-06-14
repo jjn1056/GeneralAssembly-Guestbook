@@ -5,13 +5,11 @@ use GeneralAssembly::Guestbook::Schema::Candy;
 table 'comment';
 
 column 'comment_id' => {
-  data_type => 'varchar',
-  size => '22',
+  data_type => 'integer',
 };
 
 column 'user_id' => {
-  data_type => 'varchar',
-  size => '22',
+  data_type => 'integer',
 };
 
 column 'text' => {

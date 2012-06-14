@@ -6,7 +6,6 @@ require 'maint/Makefile.PL.include'
   if $Module::Install::AUTHOR;
 
 requires 'Web::Simple';
-requires 'HTML::Zoom';
 requires 'Plack';
 requires 'Text::Markdown';
 requires 'IO::All';
@@ -14,7 +13,6 @@ requires 'Class::Load';
 requires 'DBIx::Class';
 requires 'DBIx::Class::Candy';
 requires 'DBIx::Class::Helpers';
-requires 'Data::UUID::Base64URLSafe';
 requires 'Test::DBIx::Class';
 requires 'File::Spec';
 requires 'File::ShareDir::ProjectDistDir';

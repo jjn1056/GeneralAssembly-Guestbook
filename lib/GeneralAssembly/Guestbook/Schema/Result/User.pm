@@ -5,8 +5,7 @@ use GeneralAssembly::Guestbook::Schema::Candy;
 table 'user';
 
 column 'user_id' => {
-  data_type => 'varchar',
-  size => '22',
+  data_type => 'integer',
 };
 
 column 'name' => {
